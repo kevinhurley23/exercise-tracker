@@ -1,0 +1,106 @@
+html {
+  background-color: #2f4550;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+}
+
+.set-controls {
+  padding-left: 16px;
+  gap: 20px;
+}
+.set-controls p {
+  font-size: 20px;
+  color: white;
+  border: 1px solid white;
+  padding: 5px;
+  cursor: pointer;
+}
+.set-controls p:hover {
+  background-color: #76abda;
+}
+
+.checkboxes {
+  padding: 0 10px;
+}
+
+input[type=checkbox] {
+  width: 25px;
+  height: 25px;
+  accent-color: #76abda;
+  margin: 3px;
+}
+
+input[type=text] {
+  font-size: 20px;
+  padding: 5px;
+  flex-grow: 1;
+}
+
+i {
+  font-size: 1.8rem;
+  margin: 10px 15px;
+}
+i:hover {
+  transform: scale(1.2);
+  transition: 0.4s;
+}
+
+.add-row {
+  color: #0daf4e;
+}
+
+.delete-row {
+  color: #d17c95;
+}
+.delete-row:first-of-type {
+  display: none;
+}
+
+.modal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #2f4550;
+  color: #f4f4f9;
+  border: 2px solid #f4f4f9;
+  padding: 20px;
+  border-radius: 10px;
+}
+.modal-content .row {
+  flex-wrap: nowrap;
+}
+.modal-content label {
+  font-size: 1.1rem;
+}
+.modal-content input {
+  margin: 10px 0;
+  border: 1px solid black;
+}
+.modal-content button {
+  font-size: 1.2rem;
+  padding: 10px 20px;
+  margin: 0;
+  width: auto;
+  flex-grow: 1;
+}
+.modal-content i {
+  margin: 0 0 0 15px;
+}/*# sourceMappingURL=style.css.map */
