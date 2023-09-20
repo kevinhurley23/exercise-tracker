@@ -5,6 +5,7 @@ $(document).ready(function () {
     newRow.find('input[type="text"]').val("");
     newRow.insertAfter(row);
   }
+  $("body").on("click", ".add-row", addRow);
 
   function deleteRow() {
     let row = $(this).closest(".row");
@@ -13,6 +14,7 @@ $(document).ready(function () {
       row.remove();
     }
   }
+  $("body").on("click", ".delete-row", deleteRow);
 
   function addSet() {
     $(".row.exercise").each(function () {
@@ -20,6 +22,7 @@ $(document).ready(function () {
       $(this).find(".checkboxes").append(checkbox);
     });
   }
+  $("body").on("click", ".add-set", addSet);
 
   function deleteSet() {
     $(".row.exercise").each(function () {
@@ -29,65 +32,15 @@ $(document).ready(function () {
       }
     });
   }
+  $("body").on("click", ".delete-set", deleteSet);
 
   function clearChecks() {
     $('input[type="checkbox"]').each(function () {
       $(this).prop("checked", false);
     });
   }
-
-  function loadWorkout() {
-    $("#workout-list").empty();
-    $("#load-modal p").hide();
-    const workouts = Object.keys(localStorage).filter((key) => {
-      let item;
-      try {
-        item = JSON.parse(localStorage.getItem(key));
-      } catch (e) {
-        return false;
-      }
-      return item.type === "workout";
-    });
-    $("#load-modal").show();
-    if (workouts.length > 0) {
-      workouts.forEach((workout) => {
-        let item = JSON.parse(localStorage.getItem(workout));
-        let date = new Date(item.date).toLocaleString();
-        let button = $(
-          `<button class="workout-button" data="${workout}">${workout} (${date})</button>`
-        );
-        button.on("click", function () {
-          $("#rows-container").html("");
-          item.rows.forEach((row, index) => {
-            let newRow = $(initialRows);
-            newRow.find(".find").val(row.find);
-            newRow.find(".replace").val(row.replace);
-            newRow.find(`.mode input`).attr("name", `mode-${index + 1}`);
-            newRow
-              .find(`.mode input[value="${row.mode}"]`)
-              .prop("checked", true);
-            $("#rows-container").append(newRow);
-          });
-          updateLabels();
-          $("#load-modal").hide();
-        });
-        let row = $('<div class="row"></div>');
-        row.append(button);
-        row.append(
-          "<i class='fa-regular fa-square-minus delete-workout' title='Delete Workout'></i>"
-        );
-        $("#workout-list").append(row);
-      });
-    } else {
-      $("#load-modal p").show();
-    }
-  }
-
-  $("body").on("click", ".add-row", addRow);
-  $("body").on("click", ".delete-row", deleteRow);
-  $("body").on("click", ".add-set", addSet);
-  $("body").on("click", ".delete-set", deleteSet);
   $("body").on("click", ".clear-checks", clearChecks);
+
   $("#save-dialog").on("click", function () {
     $("#save-modal").show();
     $("#workout-name").focus();
@@ -107,7 +60,6 @@ $(document).ready(function () {
         exercises: exercises,
       },
     };
-
     let workoutName = $("#workout-name").val();
     if (workoutName) {
       localStorage.setItem(workoutName, JSON.stringify(data));
@@ -115,5 +67,89 @@ $(document).ready(function () {
     $("#workout-name").val("");
     $("#save-modal").hide();
   });
+
+  function loadWorkout() {
+    // initialize modal
+    $("#workout-list").empty();
+    $("#load-modal p").hide();
+    // get items from local storage
+    const workouts = Object.keys(localStorage).filter((key) => {
+      let item;
+      try {
+        item = JSON.parse(localStorage.getItem(key));
+      } catch (e) {
+        return false;
+      }
+      return item.type === "workout";
+    });
+    // Create buttons in modal for each saved workout
+    $("#load-modal").show();
+    if (workouts.length > 0) {
+      workouts.forEach((workout) => {
+        let item = JSON.parse(localStorage.getItem(workout));
+        let date = new Date(item.date).toLocaleString();
+        let button = $(
+          `<button class="workout-button" data="${workout}">${workout} (${date})</button>`
+        );
+        // Function to rebuild markup with the data from the selected workout
+        button.on("click", function () {
+          $(".group").html("");
+          item.data.exercises.forEach((exercise) => {
+            let row = $(`
+              <div class="row exercise">
+                <div class="checkboxes">
+                  <input type="checkbox" />
+                </div>
+                <input type="text" class="exercise-name" />
+                <div class="add-delete">
+                  <i
+                    class="fa-regular fa-square-plus add-row"
+                    title="Add new row"
+                  ></i>
+                  <i
+                    class="fa-regular fa-square-minus delete-row"
+                    title="Delete row"
+                  ></i>
+                </div>
+              </div>
+            `);
+            for (let i = item.data.sets; i > 1; i--) {
+              row.find(".checkboxes").append(`<input type="checkbox" />`);
+            }
+            row.find(".exercise-name").val(exercise);
+            $(".group").append(row);
+          });
+          $("#load-modal").hide();
+        });
+        // Continue adding buttons to modal
+        let row = $('<div class="row"></div>');
+        row.append(button);
+        row.append(
+          "<i class='fa-regular fa-square-minus delete-workout' title='Delete Workout'></i>"
+        );
+        $("#workout-list").append(row);
+      });
+      // If there are no saved workouts
+    } else {
+      $("#load-modal p").show();
+    }
+  }
   $("#load-dialog").on("click", loadWorkout);
+
+  function deleteWorkout() {
+    let key = $(this).siblings("button").attr("data");
+    localStorage.removeItem(key);
+    let row = $(this).closest(".row");
+    row.remove();
+    if ($("#workout-list").is(":empty")) {
+      $("#load-modal p").show();
+    }
+  }
+  $("#workout-list").on("click", ".delete-workout", deleteWorkout);
+
+  $(".modal").on("click", function (event) {
+    if (event.target === this) {
+      $(".modal").hide();
+    }
+  });
 });

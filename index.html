@@ -13,21 +13,21 @@
   </head>
   <body>
     <div class="container">
-      <div class="group">
-        <div class="row set-controls">
-          <p class="add-set">Add Set</p>
-          <p class="delete-set">Delete Set</p>
-          <p class="clear-checks">Clear Checkboxes</p>
-          <p id="save-dialog">Save Workout</p>
-          <p id="load-dialog">Load Workout</p>
-        </div>
+      <div class="row controls">
+        <p class="add-set">Add Set</p>
+        <p class="delete-set">Delete Set</p>
+        <p class="clear-checks">Clear Checkboxes</p>
+        <p id="save-dialog">Save Workout</p>
+        <p id="load-dialog">Load Workout</p>
+      </div>
+      <div id="group-1" class="group">
         <div class="row exercise">
           <div class="checkboxes">
             <input type="checkbox" />
             <input type="checkbox" />
             <input type="checkbox" />
           </div>
-          <input type="text" />
+          <input type="text" class="exercise-name" />
           <div class="add-delete">
             <i
               class="fa-regular fa-square-plus add-row"
@@ -40,19 +40,19 @@
           </div>
         </div>
       </div>
-      <div id="save-modal" class="modal" style="display: none">
-        <div class="modal-content">
-          <label for="workout-name">Enter a name for the workout:</label>
-          <input type="text" id="workout-name" />
-          <button id="save-button">Save</button>
-        </div>
+    </div>
+    <div id="save-modal" class="modal" style="display: none">
+      <div class="modal-content">
+        <label for="workout-name">Enter a name for the workout:</label>
+        <input type="text" id="workout-name" />
+        <button id="save-button">Save</button>
       </div>
-      <div id="load-modal" class="modal" style="display: none">
-        <div class="modal-content">
-          <h2>Load Saved Workout</h2>
-          <div id="workout-list"></div>
-          <p style="display: none; text-align: center">No workouts found</p>
-        </div>
+    </div>
+    <div id="load-modal" class="modal" style="display: none">
+      <div class="modal-content">
+        <h2>Load Saved Workout</h2>
+        <div id="workout-list"></div>
+        <p style="display: none; text-align: center">No workouts found</p>
       </div>
     </div>
   </body>

@@ -1,6 +1,5 @@
 $lgray: #f4f4f9;
-$gray: #6e8999;
-$dgray: #2f4550;
+$dgray: #353e42;
 $primary: #a7cced;
 $primary-hover: #76abda;
 $green: #0daf4e;
@@ -17,7 +16,7 @@ html {
   display: flex;
   align-items: center;
 }
-.set-controls {
+.controls {
   padding-left: 16px;
   gap: 20px;
   p {
@@ -61,6 +60,10 @@ i {
   &:first-of-type {
     display: none;
   }
+}
+
+.delete-workout {
+  color: $red;
 }
 
 .modal {
