@@ -8,8 +8,9 @@ $(document).ready(function () {
   $("body").on("click", ".add-row", addRow);
 
   function deleteRow() {
-    let row = $(this).closest(".row");
-    let numRows = $(".row").length;
+    let row = $(this).closest(".row.exercise");
+    let numRows = $(".row.exercise").length;
+    console.log(numRows);
     if (numRows > 1) {
       row.remove();
     }
