@@ -1,6 +1,6 @@
 $(document).ready(function () {
   function addRow() {
-    let row = $(this).closest(".row");
+    let row = $(this).closest(".exercise");
     let newRow = row.clone();
     newRow.find('input[type="text"]').val("");
     newRow.insertAfter(row);
@@ -97,7 +97,7 @@ $(document).ready(function () {
           $(".group").html("");
           item.data.exercises.forEach((exercise) => {
             let row = $(`
-              <div class="row exercise">
+              <div class="row exercise" draggable="true">
                 <div class="checkboxes">
                   <input type="checkbox" />
                 </div>

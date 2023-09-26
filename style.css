@@ -21,10 +21,18 @@ html {
   color: white;
   border: 1px solid white;
   padding: 5px;
+  text-align: center;
   cursor: pointer;
 }
 .controls p:hover {
   background-color: #76abda;
+}
+
+.exercise {
+  margin-bottom: 10px;
+}
+.exercise:first-child .delete-row {
+  visibility: hidden;
 }
 
 .checkboxes {
@@ -46,7 +54,7 @@ input[type=text] {
 
 i {
   font-size: 1.8rem;
-  margin: 10px 15px;
+  margin-left: 15px;
 }
 i:hover {
   transform: scale(1.2);
@@ -60,8 +68,9 @@ i:hover {
 .delete-row {
   color: #d17c95;
 }
-.delete-row:first-of-type {
-  display: none;
+
+.dragger {
+  color: white;
 }
 
 .delete-workout {
