@@ -1,9 +1,14 @@
 $(document).ready(function () {
+  const exerciseTemplate = document.querySelector(".exercise");
+
   function addRow() {
     let row = $(this).closest(".exercise");
     let newRow = row.clone();
     newRow.find('input[type="text"]').val("");
     newRow.insertAfter(row);
+    $(".exercise").each(function (i) {
+      $(this).attr("data-index", i + 1);
+    });
   }
   $("body").on("click", ".add-row", addRow);
 
@@ -16,6 +21,15 @@ $(document).ready(function () {
     }
   }
   $("body").on("click", ".delete-row", deleteRow);
+
+  $(".group").sortable({
+    items: ".exercise",
+    update: function (event, ui) {
+      $(".exercise").each(function (i) {
+        $(this).attr("data-index", i + 1);
+      });
+    },
+  });
 
   function addSet() {
     $(".row.exercise").each(function () {
@@ -96,24 +110,7 @@ $(document).ready(function () {
         button.on("click", function () {
           $(".group").html("");
           item.data.exercises.forEach((exercise) => {
-            let row = $(`
-              <div class="row exercise" draggable="true">
-                <div class="checkboxes">
-                  <input type="checkbox" />
-                </div>
-                <input type="text" class="exercise-name" />
-                <div class="add-delete">
-                  <i
-                    class="fa-regular fa-square-plus add-row"
-                    title="Add new row"
-                  ></i>
-                  <i
-                    class="fa-regular fa-square-minus delete-row"
-                    title="Delete row"
-                  ></i>
-                </div>
-              </div>
-            `);
+            let row = $(exerciseTemplate).clone();
             for (let i = item.data.sets; i > 1; i--) {
               row.find(".checkboxes").append(`<input type="checkbox" />`);
             }

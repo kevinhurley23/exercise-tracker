@@ -5,6 +5,7 @@ html {
 .container {
   max-width: 800px;
   margin: 0 auto;
+  padding: 30px 15px;
 }
 
 .row {
@@ -15,8 +16,10 @@ html {
 .controls {
   padding-left: 16px;
   gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 15px;
 }
-.controls p {
+.controls div {
   font-size: 20px;
   color: white;
   border: 1px solid white;
@@ -24,7 +27,7 @@ html {
   text-align: center;
   cursor: pointer;
 }
-.controls p:hover {
+.controls div:hover {
   background-color: #76abda;
 }
 
@@ -33,6 +36,14 @@ html {
 }
 .exercise:first-child .delete-row {
   visibility: hidden;
+}
+@media (max-width: 600px) {
+  .exercise {
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid white;
+  }
 }
 
 .checkboxes {
@@ -43,6 +54,8 @@ input[type=checkbox] {
   width: 25px;
   height: 25px;
   accent-color: #76abda;
+  margin: 0;
+  padding: 0;
   margin: 3px;
 }
 

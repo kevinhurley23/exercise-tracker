@@ -9,22 +9,21 @@
       crossorigin="anonymous"
     ></script>
     <script src="./jquery3.6.1.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <title>Exercise Tracker</title>
   </head>
   <body>
     <div class="container">
       <div class="row controls">
-        <p class="add-set">Add Set</p>
-        <p class="delete-set">Delete Set</p>
-        <p class="clear-checks">Clear Checkboxes</p>
-        <p id="save-dialog">Save Workout</p>
-        <p id="load-dialog">Load Workout</p>
+        <div class="add-set">Add Set</div>
+        <div class="delete-set">Delete Set</div>
+        <div class="clear-checks">Clear Checkboxes</div>
+        <div id="save-dialog">Save Workout</div>
+        <div id="load-dialog">Load Workout</div>
       </div>
       <div id="group-1" class="group">
-        <div class="row exercise" draggable="true">
+        <div class="row exercise" data-index="1">
           <div class="checkboxes">
-            <input type="checkbox" />
-            <input type="checkbox" />
             <input type="checkbox" />
           </div>
           <input type="text" class="exercise-name" />

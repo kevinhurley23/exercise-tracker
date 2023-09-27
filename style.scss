@@ -11,6 +11,7 @@ html {
 .container {
   max-width: 800px;
   margin: 0 auto;
+  padding: 30px 15px;
 }
 .row {
   display: flex;
@@ -19,7 +20,9 @@ html {
 .controls {
   padding-left: 16px;
   gap: 20px;
-  p {
+  flex-wrap: wrap;
+  margin-bottom: 15px;
+  div {
     font-size: 20px;
     color: white;
     border: 1px solid white;
@@ -36,6 +39,12 @@ html {
   &:first-child .delete-row {
     visibility: hidden;
   }
+  @media (max-width: 600px) {
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid white;
+  }
 }
 .checkboxes {
   padding: 0 10px;
@@ -44,6 +53,8 @@ input[type="checkbox"] {
   width: 25px;
   height: 25px;
   accent-color: $primary-hover;
+  margin: 0;
+  padding: 0;
   margin: 3px;
 }
 input[type="text"] {
